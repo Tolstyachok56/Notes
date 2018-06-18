@@ -33,6 +33,13 @@ class ViewController: UIViewController {
                 print("\(error): \(error.localizedDescription)")
             }
         }
+        
+        let note = Note(context: coreDataManager.managedObjectContext)
+        note.title = "My Second Note"
+        note.createdAt = Date()
+        note.updatedAt = Date()
+        
+        print(note)
 
         
     }
