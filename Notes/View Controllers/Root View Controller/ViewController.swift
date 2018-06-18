@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
     
@@ -14,6 +15,24 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let entityDescription = NSEntityDescription.entity(forEntityName: "Note", in: coreDataManager.managedObjectContext) {
+            print(entityDescription.name ?? "No name")
+            print(entityDescription.properties)
+            
+            let note = NSManagedObject(entity: entityDescription, insertInto: coreDataManager.managedObjectContext)
+            note.setValue("My First Note", forKey: "title")
+            note.setValue(NSDate(), forKey: "createdAt")
+            note.setValue(NSDate(), forKey: "updatedAt")
+            print(note)
+            
+            do {
+                try coreDataManager.managedObjectContext.save()
+            } catch {
+                print("Unable to save managed object context")
+                print("\(error): \(error.localizedDescription)")
+            }
+        }
 
         
     }
