@@ -73,6 +73,7 @@
                                                     <outlet property="contentsLabel" destination="ZtY-DT-2KL" id="ZQy-oe-DZ5"/>
                                                     <outlet property="titleLabel" destination="FFQ-aJ-TLM" id="FtR-nH-bLa"/>
                                                     <outlet property="updatedAtLabel" destination="9C7-Vh-SFa" id="JGw-Fd-LHD"/>
+                                                    <segue destination="PSw-h4-cP5" kind="show" identifier="Note" id="qdc-kQ-A8e"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -134,14 +135,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="okU-al-MkX">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <items>
-                                    <barButtonItem title="Item" id="pMC-KP-moV"/>
-                                </items>
-                            </toolbar>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="---" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pfH-H5-2ua">
-                                <rect key="frame" x="16" y="126" width="343" height="481"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pfH-H5-2ua">
+                                <rect key="frame" x="16" y="126" width="343" height="525"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -149,15 +144,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="okU-al-MkX" firstAttribute="top" secondItem="pfH-H5-2ua" secondAttribute="bottom" constant="16" id="6tN-dU-K3c"/>
                             <constraint firstItem="pfH-H5-2ua" firstAttribute="top" secondItem="6Ew-iJ-8yy" secondAttribute="bottom" constant="16" id="7gG-qu-A29"/>
                             <constraint firstItem="Ayy-p5-RMj" firstAttribute="trailing" secondItem="6Ew-iJ-8yy" secondAttribute="trailing" constant="16" id="DiP-wk-847"/>
-                            <constraint firstItem="okU-al-MkX" firstAttribute="leading" secondItem="Ayy-p5-RMj" secondAttribute="leading" id="EKR-IT-8yh"/>
                             <constraint firstItem="6Ew-iJ-8yy" firstAttribute="top" secondItem="Ayy-p5-RMj" secondAttribute="top" constant="16" id="GjH-zQ-9Xh"/>
-                            <constraint firstItem="okU-al-MkX" firstAttribute="trailing" secondItem="Ayy-p5-RMj" secondAttribute="trailing" id="IQm-YH-FKQ"/>
+                            <constraint firstItem="Ayy-p5-RMj" firstAttribute="bottom" secondItem="pfH-H5-2ua" secondAttribute="bottom" constant="16" id="IKp-r3-Jze"/>
                             <constraint firstItem="pfH-H5-2ua" firstAttribute="leading" secondItem="Ayy-p5-RMj" secondAttribute="leading" constant="16" id="UH8-Gj-WEb"/>
                             <constraint firstItem="Ayy-p5-RMj" firstAttribute="trailing" secondItem="pfH-H5-2ua" secondAttribute="trailing" constant="16" id="UTI-t7-75l"/>
-                            <constraint firstItem="okU-al-MkX" firstAttribute="bottom" secondItem="Ayy-p5-RMj" secondAttribute="bottom" id="bY6-e5-SxK"/>
                             <constraint firstItem="6Ew-iJ-8yy" firstAttribute="leading" secondItem="Ayy-p5-RMj" secondAttribute="leading" constant="16" id="dqb-ty-NuP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ayy-p5-RMj"/>
@@ -176,7 +168,50 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Rb-ck-O35" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1596" y="-669.71514242878561"/>
+            <point key="canvasLocation" x="1607" y="-904"/>
+        </scene>
+        <!--Note View Controller-->
+        <scene sceneID="KYf-VV-mOS">
+            <objects>
+                <viewController id="PSw-h4-cP5" customClass="NoteViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EBJ-Pg-goE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tes-yO-6ad">
+                                <rect key="frame" x="16" y="80" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8I5-yl-cJY">
+                                <rect key="frame" x="16" y="126" width="343" height="525"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Jbf-Ow-M6G" firstAttribute="trailing" secondItem="8I5-yl-cJY" secondAttribute="trailing" constant="16" id="9Bl-UC-qHb"/>
+                            <constraint firstItem="8I5-yl-cJY" firstAttribute="top" secondItem="Tes-yO-6ad" secondAttribute="bottom" constant="16" id="NDq-y5-eu5"/>
+                            <constraint firstItem="8I5-yl-cJY" firstAttribute="leading" secondItem="Jbf-Ow-M6G" secondAttribute="leading" constant="16" id="Rj0-3J-xPP"/>
+                            <constraint firstItem="Jbf-Ow-M6G" firstAttribute="trailing" secondItem="Tes-yO-6ad" secondAttribute="trailing" constant="16" id="WuF-e6-u8y"/>
+                            <constraint firstItem="Tes-yO-6ad" firstAttribute="leading" secondItem="Jbf-Ow-M6G" secondAttribute="leading" constant="16" id="dNR-Za-qdy"/>
+                            <constraint firstItem="Jbf-Ow-M6G" firstAttribute="bottom" secondItem="8I5-yl-cJY" secondAttribute="bottom" constant="16" id="nHu-vh-D1O"/>
+                            <constraint firstItem="Tes-yO-6ad" firstAttribute="top" secondItem="Jbf-Ow-M6G" secondAttribute="top" constant="16" id="yW1-x7-yZx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Jbf-Ow-M6G"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="u6g-ma-Opp"/>
+                    <connections>
+                        <outlet property="contentsTextView" destination="8I5-yl-cJY" id="jBQ-70-yG3"/>
+                        <outlet property="titleTextField" destination="Tes-yO-6ad" id="ce1-nI-8VX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XiQ-VG-w7A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1606" y="-240"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tn1-OZ-Wg5">

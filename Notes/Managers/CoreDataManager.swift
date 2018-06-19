@@ -10,13 +10,11 @@ import CoreData
 
 final class CoreDataManager {
     
+    //MARK: - Properties
+    
     private let modelName: String
     
-    init(modelName: String) {
-        self.modelName = modelName
-        
-        setupNotificationHandling()
-    }
+    //MARK: -
     
     private(set) lazy var managedObjectContext: NSManagedObjectContext = {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
@@ -53,15 +51,29 @@ final class CoreDataManager {
         return persistentStoreCoordinator
     }()
     
+    //MARK: - Initialization
+    
+    init(modelName: String) {
+        self.modelName = modelName
+        
+        setupNotificationHandling()
+    }
+    
+    //MARK: - Notification handling
+    
+    @objc func saveChanges(_ notification: Notification) {
+        saveChanges()
+    }
+    
+    //MARK: - Helper methods
+    
     private func setupNotificationHandling() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(saveChanges(_:)), name: Notification.Name.UIApplicationWillTerminate, object: nil)
         notificationCenter.addObserver(self, selector: #selector(saveChanges(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
     }
     
-    @objc func saveChanges(_ notification: Notification) {
-        saveChanges()
-    }
+    //MARK: -
     
     private func saveChanges() {
         guard managedObjectContext.hasChanges else { return }
