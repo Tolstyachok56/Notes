@@ -87,7 +87,8 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
             destination.managedObjectContext = coreDataManager.managedObjectContext
         case Segue.Note:
             guard let destination = segue.destination as? NoteViewController else { return }
-            guard let indexPath = tableView.indexPathForSelectedRow, let note = fetchedResultsController.object(at: indexPath) else { return }
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            let note = fetchedResultsController.object(at: indexPath) 
             destination.note = note
         default:
             fatalError("Unexpected segue identifier")
