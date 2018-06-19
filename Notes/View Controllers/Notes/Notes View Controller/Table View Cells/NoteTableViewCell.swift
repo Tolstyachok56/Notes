@@ -10,11 +10,17 @@ import UIKit
 
 class NoteTableViewCell: UITableViewCell {
     
+    //MARK: - Static properties
+    
     static let reuseIdentifier = "NoteTableViewCell"
+    
+    //MARK: - Properties
     
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var contentsLabel: UILabel!
     @IBOutlet var updatedAtLabel: UILabel!
+    
+    //MARK: - Initialization
     
     override func awakeFromNib() {
         super.awakeFromNib()

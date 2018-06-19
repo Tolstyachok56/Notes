@@ -11,17 +11,31 @@ import CoreData
 
 class NotesViewController: UIViewController {
     
-    @IBOutlet var messageLabel: UILabel!
-    @IBOutlet var tableView: UITableView!
+    //MARK: - Segues
     
     private enum Segue {
         static let AddNote = "AddNote"
     }
     
+    //MARK: - Properties
+    
+    @IBOutlet var messageLabel: UILabel!
+    @IBOutlet var tableView: UITableView!
+    
+    //MARK: -
+    
     var coreDataManager = CoreDataManager(modelName: "Notes")
     
+    //MARK: - View life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        messageLabel.text = "You don't have any notes yet"
+    }
     
     //MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return }
         

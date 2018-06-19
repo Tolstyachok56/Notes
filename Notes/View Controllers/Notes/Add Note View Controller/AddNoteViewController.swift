@@ -11,13 +11,29 @@ import CoreData
 
 class AddNoteViewController: UIViewController {
     
+    //MARK: - Properties
+    
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var contentsTextView: UITextView!
     
+    //MARK: -
+    
     var managedObjectContext: NSManagedObjectContext?
+    
+    //MARK: - View life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = "Add Note"
+    }
 
+    //MARK: - Actions
+    
     @IBAction func save(_ sender: UIBarButtonItem) {
+        
         guard let managedObjectContext = managedObjectContext else { return }
+        
         guard let title = titleTextField.text, !title.isEmpty else {
             showAlert(withTitle: "Title missing", andMessage: "Your note doesn't have a title.")
             return
@@ -31,6 +47,7 @@ class AddNoteViewController: UIViewController {
         note.updatedAt = Date()
         
         _ = navigationController?.popViewController(animated: true)
+        
     }
     
 }
