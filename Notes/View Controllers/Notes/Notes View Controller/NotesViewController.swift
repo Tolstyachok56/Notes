@@ -30,14 +30,6 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     //MARK: -
     
-    private var notes: [Note]? {
-        didSet {
-            updateView()
-        }
-    }
-    
-    //MARK: -
-    
     private var hasNotes: Bool {
         guard let fetchedObjects = fetchedResultsController.fetchedObjects else { return false }
         return fetchedObjects.count > 0
@@ -70,9 +62,9 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         
         title = "Notes"
+        
         setupView()
         fetchNotes()
-        
         updateView()
     }
     
