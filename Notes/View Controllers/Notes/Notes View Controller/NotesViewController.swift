@@ -88,7 +88,7 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
         case Segue.Note:
             guard let destination = segue.destination as? NoteViewController else { return }
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
-            let note = fetchedResultsController.object(at: indexPath) 
+            let note = fetchedResultsController.object(at: indexPath)
             destination.note = note
         default:
             fatalError("Unexpected segue identifier")
@@ -143,11 +143,7 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
             fatalError("Unexpected index path")
         }
         
-        let note = fetchedResultsController.object(at: indexPath)
-        
-        cell.titleLabel.text = note.title
-        cell.contentsLabel.text = note.contents
-        cell.updatedAtLabel.text = updatedAtDateFormatter.string(from: note.updatedAt!)
+        configure(cell, at: indexPath)
         
         return cell
     }
@@ -158,6 +154,51 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
         let note = fetchedResultsController.object(at: indexPath)
         
         note.managedObjectContext?.delete(note)
+    }
+    
+    //MARK: - NSFetchedResultsControllerDelegate methods
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let indexPath = newIndexPath {
+                tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: indexPath, with: .automatic)
+            }
+        case .update:
+            if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) {
+                configure(cell, at: indexPath)
+            }
+        case .move:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            if let newIndexPath = newIndexPath {
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+        updateView()
+    }
+    
+    //MARK: - Helper methods
+    
+    private func configure(_ cell: NoteTableViewCell, at indexPath: IndexPath) {
+        let note = fetchedResultsController.object(at: indexPath)
+        
+        cell.titleLabel.text = note.title
+        cell.contentsLabel.text = note.contents
+        cell.updatedAtLabel.text = updatedAtDateFormatter.string(from: note.updatedAt!)
     }
 
 }
