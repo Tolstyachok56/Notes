@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
-class CategoriesViewController: UIViewController {
+class CategoriesViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     //MARK: - Segues
     
@@ -25,6 +26,26 @@ class CategoriesViewController: UIViewController {
     //MARK: -
     
     var coreDataManager = CoreDataManager(modelName: "Category")
+    
+    //MARK: -
+    
+    private lazy var fetchedResultsController: NSFetchedResultsController<Category> = {
+        let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Category.name), ascending: true)]
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.coreDataManager.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fetchedResultsController.delegate = self
+        
+        return fetchedResultsController
+    }()
+    
+    //MARK: -
+    
+    private var hasCategories: Bool {
+        guard let fetchedObjects = fetchedResultsController.fetchedObjects else { return false }
+        return fetchedObjects.count > 0
+    }
     
     //MARK: - View life cycle
 
@@ -50,6 +71,9 @@ class CategoriesViewController: UIViewController {
         case Segue.Category:
             guard let destination = segue.destination as? CategoryViewController else { return }
             
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            let category = fetchedResultsController.object(at: indexPath)
+            destination.category = category
         default:
             fatalError("Unexpected segue identifier")
         }
@@ -62,7 +86,8 @@ class CategoriesViewController: UIViewController {
         setupBarButtonItems()
     }
     private func updateView() {
-        
+        tableView.isHidden = !hasCategories
+        messageLabel.isHidden = hasCategories
     }
     
     private func setupMesageLabel() {
@@ -82,7 +107,85 @@ class CategoriesViewController: UIViewController {
     //MARK: - Fetching
     
     private func fetchCategories() {
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            print("Unable to perform fetch")
+            print("\(error): \(error.localizedDescription)")
+        }
+    }
+    
+    //MARK: - UITableViewDataSource methods
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        guard let sections = fetchedResultsController.sections else { return 0 }
+        return sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let section = fetchedResultsController.sections?[section] else { return 0 }
+        return section.numberOfObjects
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTableViewCell.reuseIdentifier, for: indexPath) as? CategoryTableViewCell else {
+            fatalError("Unexpected index path")
+        }
         
+        configure(cell, at: indexPath)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        
+        let category = fetchedResultsController.object(at: indexPath)
+        
+        category.managedObjectContext?.delete(category)
+    }
+    
+    //MARK: - Helper methods
+    
+    private func configure(_ cell: CategoryTableViewCell, at indexPath: IndexPath) {
+        let category = fetchedResultsController.object(at: indexPath)
+        
+        cell.nameLabel.text = category.name
+    }
+    
+    //MARK: - NSFetchedResultsControllerDelegate methods
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let indexPath = newIndexPath {
+                tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        case .update:
+            if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? CategoryTableViewCell {
+                configure(cell, at: indexPath)
+            }
+        case .move:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            if let newIndexPath = newIndexPath {
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+        updateView()
     }
     
 }
