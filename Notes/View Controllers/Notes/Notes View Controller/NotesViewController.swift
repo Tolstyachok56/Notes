@@ -11,6 +11,9 @@ import CoreData
 
 class NotesViewController: UIViewController {
     
+    @IBOutlet var messageLabel: UILabel!
+    @IBOutlet var tableView: UITableView!
+    
     private enum Segue {
         static let AddNote = "AddNote"
     }
