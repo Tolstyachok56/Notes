@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class NotesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class NotesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     //MARK: - Segues
     
@@ -39,8 +39,8 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
     //MARK: -
     
     private var hasNotes: Bool {
-        guard let notes = notes else { return false }
-        return notes.count > 0
+        guard let fetchedObjects = fetchedResultsController.fetchedObjects else { return false }
+        return fetchedObjects.count > 0
     }
     
     //MARK: -
@@ -51,6 +51,19 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
         return dateFormatter
     }()
     
+    //MARK: -
+    
+    private lazy var fetchedResultsController: NSFetchedResultsController<Note> = {
+        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Note.updatedAt), ascending: false)]
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.coreDataManager.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fetchedResultsController.delegate = self
+        
+        return fetchedResultsController
+    }()
+    
     //MARK: - View life cycle
     
     override func viewDidLoad() {
@@ -59,7 +72,8 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
         title = "Notes"
         setupView()
         fetchNotes()
-        setupNotificationHandling()
+        
+        updateView()
     }
     
     //MARK: - Navigation
@@ -73,7 +87,7 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
             destination.managedObjectContext = coreDataManager.managedObjectContext
         case Segue.Note:
             guard let destination = segue.destination as? NoteViewController else { return }
-            guard let indexPath = tableView.indexPathForSelectedRow, let note = notes?[indexPath.row] else { return }
+            guard let indexPath = tableView.indexPathForSelectedRow, let note = fetchedResultsController.object(at: indexPath) else { return }
             destination.note = note
         default:
             fatalError("Unexpected segue identifier")
@@ -103,40 +117,32 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
     //MARK: - Fetching
     
     private func fetchNotes() {
-        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Note.updatedAt), ascending: false)]
-        
-        coreDataManager.managedObjectContext.performAndWait {
-            do {
-                let notes = try fetchRequest.execute()
-                self.notes = notes
-                self.tableView.reloadData()
-            } catch let fetchError {
-                print("Unable to execute fetch request")
-                print("\(fetchError): \(fetchError.localizedDescription)")
-            }
+        do {
+            try self.fetchedResultsController.performFetch()
+        } catch let fetchError {
+            print("Unable to execute fetch request")
+            print("\(fetchError): \(fetchError.localizedDescription)")
         }
     }
     
     //MARK: - UITableViewDataSource methods
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return hasNotes ? 1 : 0
+        guard let sections = fetchedResultsController.sections else { return 0 }
+        return sections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let notes = notes else { return 0 }
-        return notes.count
+        guard let section = fetchedResultsController.sections?[section] else { return 0 }
+        return section.numberOfObjects
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let note = notes?[indexPath.row] else {
-            fatalError("Unexpected index path")
-        }
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NoteTableViewCell.reuseIdentifier, for: indexPath) as? NoteTableViewCell else {
             fatalError("Unexpected index path")
         }
+        
+        let note = fetchedResultsController.object(at: indexPath)
         
         cell.titleLabel.text = note.title
         cell.contentsLabel.text = note.contents
@@ -148,63 +154,10 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         
-        guard let note = notes?[indexPath.row] else { fatalError("Unexpected index path")}
+        let note = fetchedResultsController.object(at: indexPath)
         
         note.managedObjectContext?.delete(note)
     }
-    
-    //MARK: - Helper methods
-    
-    private func setupNotificationHandling() {
-        let notificationCenter = NotificationCenter.default
-        
-        notificationCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange(_:)), name: Notification.Name.NSManagedObjectContextObjectsDidChange, object: coreDataManager.managedObjectContext)
-    }
-    
-    //MARK: - Notification handling
-    
-    @objc private func managedObjectContextObjectsDidChange(_ notification: Notification) {
-        
-        guard let userInfo = notification.userInfo else { return }
-        
-        var notesDidChange = false
-        
-        if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject> {
-            for insert in inserts {
-                if let note = insert as? Note {
-                    notes?.append(note)
-                    notesDidChange = true
-                }
-            }
-        }
-        
-        if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject> {
-            for update in updates {
-                if let _ = update as? Note {
-                    notesDidChange = true
-                }
-            }
-        }
-        
-        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> {
-            for delete in deletes {
-                if let note = delete as? Note {
-                    if let index = notes?.index(of: note) {
-                        notes?.remove(at: index)
-                        notesDidChange = true
-                    }
-                }
-            }
-        }
-        
-        if notesDidChange {
-            notes?.sort(by: { $0.updatedAt! > $1.updatedAt!})
-            tableView.reloadData()
-            updateView()
-        }
-        
-    }
-
 
 }
 
