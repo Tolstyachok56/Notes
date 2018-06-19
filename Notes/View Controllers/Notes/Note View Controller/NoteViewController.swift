@@ -10,10 +10,19 @@ import UIKit
 
 class NoteViewController: UIViewController {
     
+    //MARK: - Segues
+    
+    private enum Segue {
+        static let Categories = "Categories"
+    }
+    
     //MARK: - Properties
     
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var contentsTextView: UITextView!
+    
+    @IBOutlet var categoryLabel: UILabel!
+    
     
     //MARK: -
     
@@ -53,6 +62,20 @@ class NoteViewController: UIViewController {
     
     private func setupTextView() {
         contentsTextView.text = note?.contents
+    }
+    
+    //MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
+        
+        switch identifier {
+        case Segue.Categories:
+            guard let destination = segue.destination as? CategoriesViewController else { return }
+            destination.managedObjectContext = note?.managedObjectContext
+        default:
+            fatalError("Unexpected segue identifier")
+        }
     }
     
 }

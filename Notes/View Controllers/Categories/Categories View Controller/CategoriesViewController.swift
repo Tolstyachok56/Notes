@@ -25,15 +25,19 @@ class CategoriesViewController: UIViewController,UITableViewDataSource, UITableV
     
     //MARK: -
     
-    var coreDataManager = CoreDataManager(modelName: "Category")
+    var managedObjectContext: NSManagedObjectContext?
     
     //MARK: -
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Category> = {
+        guard let managedObjectContext = self.managedObjectContext else {
+            fatalError("No managed object context found")
+        }
+        
         let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Category.name), ascending: true)]
         
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.coreDataManager.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         
         fetchedResultsController.delegate = self
         
@@ -66,8 +70,8 @@ class CategoriesViewController: UIViewController,UITableViewDataSource, UITableV
         
         switch identifier {
         case Segue.AddCategory:
-            guard let destination = segue.destination as? AddNoteViewController else { return }
-            destination.managedObjectContext = coreDataManager.managedObjectContext
+            guard let destination = segue.destination as? AddCategoryViewController else { return }
+            destination.managedObjectContext = managedObjectContext
         case Segue.Category:
             guard let destination = segue.destination as? CategoryViewController else { return }
             

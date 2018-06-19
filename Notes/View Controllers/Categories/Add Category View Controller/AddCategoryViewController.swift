@@ -50,7 +50,7 @@ class AddCategoryViewController: UIViewController {
         }
         
         let category = Category(context: managedObjectContext)
-        category.name = name
+        category.name = nameTextField.text
         
         let _ = navigationController?.popViewController(animated: true)
     }
