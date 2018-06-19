@@ -145,6 +145,14 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
         return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle = .delete else { return }
+        
+        guard let note = notes?[indexPath.row] else { fatalError("Unexpected index path")}
+        
+        note.managedObjectContext?.delete(note)
+    }
+    
     //MARK: - Helper methods
     
     private func setupNotificationHandling() {
