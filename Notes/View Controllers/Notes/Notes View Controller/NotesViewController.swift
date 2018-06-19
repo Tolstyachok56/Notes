@@ -170,10 +170,10 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         case .delete:
             if let indexPath = indexPath {
-                tableView.deleteRows(at: indexPath, with: .automatic)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
             }
         case .update:
-            if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) {
+            if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? NoteTableViewCell {
                 configure(cell, at: indexPath)
             }
         case .move:
