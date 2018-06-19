@@ -31,7 +31,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoteTabelViewCell" rowHeight="70" id="aVS-K2-zgT" customClass="NoteTableViewCell" customModule="Notes" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoteTableViewCell" rowHeight="70" id="aVS-K2-zgT" customClass="NoteTableViewCell" customModule="Notes" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aVS-K2-zgT" id="eXH-Gf-yCK">
@@ -112,6 +112,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="messageLabel" destination="45j-5R-lg6" id="aMS-Dy-lMB"/>
+                        <outlet property="notesView" destination="jt3-gm-hsq" id="4dm-NG-LMN"/>
                         <outlet property="tableView" destination="pWg-sZ-Z04" id="BCY-W1-4Ea"/>
                     </connections>
                 </viewController>
