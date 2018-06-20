@@ -99,6 +99,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="j5x-Wr-EHE"/>
                     </view>
+                    <connections>
+                        <outlet property="nameTextField" destination="9WR-4Y-EVG" id="Sx6-Vb-29M"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2bZ-AG-gIQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
