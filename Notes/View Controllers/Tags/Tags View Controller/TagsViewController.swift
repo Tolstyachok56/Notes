@@ -126,12 +126,12 @@ class TagsViewController: UIViewController {
         let tag = fetchedResultsController.object(at: indexPath)
         
         cell.nameLabel.text = tag.name
-//
-//        if let _ = note?.tags?.contains(tag) {
-//            cell.nameLabel.textColor = .bitterSweet
-//        } else {
-//            cell.nameLabel.textColor = .black
-//        }
+
+        if let containsTag = note?.tags?.contains(tag), containsTag == true {
+            cell.nameLabel.textColor = .bitterSweet
+        } else {
+            cell.nameLabel.textColor = .black
+        }
     }
 
 }
@@ -178,11 +178,11 @@ extension TagsViewController: UITableViewDelegate {
         
         let tag = fetchedResultsController.object(at: indexPath)
         
-//        if let _ = note?.tags?.contains(tag) {
-//            note?.removeFromTags(tag)
-//        } else {
-//            note?.addToTags(tag)
-//        }
+        if let containsTag = note?.tags?.contains(tag), containsTag == true {
+            note?.removeFromTags(tag)
+        } else {
+            note?.addToTags(tag)
+        }
     }
     
 }
