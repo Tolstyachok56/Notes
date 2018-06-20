@@ -42,6 +42,7 @@
 		046A475C20DA3773007008CA /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		046A475F20DA4B1A007008CA /* ColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorViewController.swift; sourceTree = "<group>"; };
 		046A476220DA5B7F007008CA /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		046A476420DA7DA4007008CA /* Notes 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Notes 2.xcdatamodel"; sourceTree = "<group>"; };
 		046A4E5620D3FF9E000AE93B /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		046A4E5920D3FF9E000AE93B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		046A4E5B20D3FF9E000AE93B /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
@@ -66,8 +67,8 @@
 		0444EBA420D7BCA600CD7C87 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				046A476120DA5B5E007008CA /* Extensions */,
 				0444EBA520D7BCC700CD7C87 /* Notes.xcdatamodeld */,
+				046A476120DA5B5E007008CA /* Extensions */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -555,11 +556,13 @@
 		0444EBA520D7BCC700CD7C87 /* Notes.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				046A476420DA7DA4007008CA /* Notes 2.xcdatamodel */,
 				0444EBA620D7BCC700CD7C87 /* Notes.xcdatamodel */,
 			);
-			currentVersion = 0444EBA620D7BCC700CD7C87 /* Notes.xcdatamodel */;
+			currentVersion = 046A476420DA7DA4007008CA /* Notes 2.xcdatamodel */;
 			path = Notes.xcdatamodeld;
 			sourceTree = "<group>";
+			usesTabs = 0;
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */

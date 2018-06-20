@@ -91,7 +91,6 @@ class NotesViewController: UIViewController {
     
     private func setupView() {
         setupMessageLabel()
-        setupTableView()
     }
     
     private func updateView() {
@@ -101,10 +100,6 @@ class NotesViewController: UIViewController {
     
     private func setupMessageLabel() {
         messageLabel.text = "You don't have any notes yet"
-    }
-    
-    private func setupTableView() {
-        
     }
     
     //MARK: - Fetching
