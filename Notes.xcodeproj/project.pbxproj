@@ -183,8 +183,8 @@
 		046A476120DA5B5E007008CA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				046A476220DA5B7F007008CA /* Category.swift */,
 				046A477420DA9AD0007008CA /* Note.swift */,
+				046A476220DA5B7F007008CA /* Category.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
