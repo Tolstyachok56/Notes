@@ -56,7 +56,7 @@ class CategoryViewController: UIViewController {
     }
     
     private func updateColorView() {
-        
+        colorView.backgroundColor = category?.color
     }
     
     private func setupNameTextField() {
@@ -72,6 +72,7 @@ class CategoryViewController: UIViewController {
         case Segue.Color:
             guard let destination = segue.destination as? ColorViewController else { return }
             destination.delegate = self
+            destination.color = category?.color ?? .white
         default:
             fatalError("Unexpected segue identifier")
         }
@@ -83,6 +84,7 @@ class CategoryViewController: UIViewController {
 
 extension CategoryViewController: ColorViewControllerDelegate {
     func controller(_ controller: ColorViewController, didPick color: UIColor) {
+        category?.color = color
         updateColorView()
     }
     

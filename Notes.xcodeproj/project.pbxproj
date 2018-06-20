@@ -19,6 +19,7 @@
 		0444EBC620D9347600CD7C87 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444EBC520D9347600CD7C87 /* CategoryViewController.swift */; };
 		046A475D20DA3773007008CA /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A475C20DA3773007008CA /* UIColor.swift */; };
 		046A476020DA4B1A007008CA /* ColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A475F20DA4B1A007008CA /* ColorViewController.swift */; };
+		046A476320DA5B7F007008CA /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A476220DA5B7F007008CA /* Category.swift */; };
 		046A4E5A20D3FF9E000AE93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A4E5920D3FF9E000AE93B /* AppDelegate.swift */; };
 		046A4E5C20D3FF9E000AE93B /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A4E5B20D3FF9E000AE93B /* NotesViewController.swift */; };
 		046A4E5F20D3FF9E000AE93B /* Notes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 046A4E5D20D3FF9E000AE93B /* Notes.storyboard */; };
@@ -40,6 +41,7 @@
 		0444EBC520D9347600CD7C87 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		046A475C20DA3773007008CA /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		046A475F20DA4B1A007008CA /* ColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorViewController.swift; sourceTree = "<group>"; };
+		046A476220DA5B7F007008CA /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		046A4E5620D3FF9E000AE93B /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		046A4E5920D3FF9E000AE93B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		046A4E5B20D3FF9E000AE93B /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 		0444EBA420D7BCA600CD7C87 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				046A476120DA5B5E007008CA /* Extensions */,
 				0444EBA520D7BCC700CD7C87 /* Notes.xcdatamodeld */,
 			);
 			path = "Core Data";
@@ -87,13 +90,13 @@
 			path = Notes;
 			sourceTree = "<group>";
 		};
-		0444EBAC20D7E57F00CD7C87 /* Extentions */ = {
+		0444EBAC20D7E57F00CD7C87 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				0444EBAD20D7E59F00CD7C87 /* UIViewController.swift */,
 				046A475C20DA3773007008CA /* UIColor.swift */,
 			);
-			path = Extentions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		0444EBAF20D8FA1400CD7C87 /* Table View Cells */ = {
@@ -164,6 +167,14 @@
 			path = "Color View Controller";
 			sourceTree = "<group>";
 		};
+		046A476120DA5B5E007008CA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				046A476220DA5B7F007008CA /* Category.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		046A4E4D20D3FF9E000AE93B = {
 			isa = PBXGroup;
 			children = (
@@ -187,7 +198,7 @@
 				046A4E6C20D40199000AE93B /* View Controllers */,
 				046A4E6E20D401B9000AE93B /* Storyboards */,
 				046A4E6F20D40204000AE93B /* Resources */,
-				0444EBAC20D7E57F00CD7C87 /* Extentions */,
+				0444EBAC20D7E57F00CD7C87 /* Extensions */,
 				046A4E7120D40749000AE93B /* Managers */,
 				0444EBA420D7BCA600CD7C87 /* Core Data */,
 				046A4E7020D40216000AE93B /* Supporting Files */,
@@ -338,6 +349,7 @@
 				0444EBAA20D7DE5D00CD7C87 /* AddNoteViewController.swift in Sources */,
 				0444EBB120D8FA5400CD7C87 /* NoteTableViewCell.swift in Sources */,
 				046A475D20DA3773007008CA /* UIColor.swift in Sources */,
+				046A476320DA5B7F007008CA /* Category.swift in Sources */,
 				0444EBA720D7BCC700CD7C87 /* Notes.xcdatamodeld in Sources */,
 				0444EBC020D931AC00CD7C87 /* CategoryTableViewCell.swift in Sources */,
 				0444EBC420D9346200CD7C87 /* AddCategoryViewController.swift in Sources */,
