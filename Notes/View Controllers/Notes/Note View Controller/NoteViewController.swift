@@ -116,6 +116,7 @@ class NoteViewController: UIViewController {
         
         if (updates.filter{ $0 == note}).count > 0 {
             updateCategoryLabel()
+            updateTagsLabel()
         }
     }
     
