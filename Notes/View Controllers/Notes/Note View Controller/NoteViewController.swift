@@ -15,6 +15,7 @@ class NoteViewController: UIViewController {
     
     private enum Segue {
         static let Categories = "Categories"
+        static let Tags = "Tags"
     }
     
     //MARK: - Properties
@@ -22,7 +23,7 @@ class NoteViewController: UIViewController {
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var contentsTextView: UITextView!
     @IBOutlet var categoryLabel: UILabel!
-    
+    @IBOutlet var tagsLabel: UILabel!
     
     //MARK: -
     
@@ -56,6 +57,7 @@ class NoteViewController: UIViewController {
         setupTextField()
         setupTextView()
         setupCategoryLabel()
+        setupTagsLabel()
     }
     
     private func setupTextField() {
@@ -70,8 +72,16 @@ class NoteViewController: UIViewController {
         updateCategoryLabel()
     }
     
+    private func setupTagsLabel() {
+        updateTagsLabel()
+    }
+    
     private func updateCategoryLabel() {
         categoryLabel.text = note?.category?.name ?? "No category"
+    }
+    
+    private func updateTagsLabel() {
+        tagsLabel.text = "No tags"
     }
     
     //MARK: - Navigation
@@ -82,6 +92,9 @@ class NoteViewController: UIViewController {
         switch identifier {
         case Segue.Categories:
             guard let destination = segue.destination as? CategoriesViewController else { return }
+            destination.note = note
+        case Segue.Tags:
+            guard let destination = segue.destination as? TagsViewController else { return }
             destination.note = note
         default:
             fatalError("Unexpected segue identifier")

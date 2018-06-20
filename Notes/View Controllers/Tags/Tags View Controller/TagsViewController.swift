@@ -71,7 +71,7 @@ class TagsViewController: UIViewController {
     }
     
     private func setupMesageLabel() {
-        messageLabel.text = "You don't have any categories yet"
+        messageLabel.text = "You don't have any tags yet"
     }
     
     private func setupBarButtonItems() {
@@ -126,12 +126,12 @@ class TagsViewController: UIViewController {
         let tag = fetchedResultsController.object(at: indexPath)
         
         cell.nameLabel.text = tag.name
-        
-        if let _ = note?.tags?.contains(tag) {
-            cell.nameLabel.textColor = .bitterSweet
-        } else {
-            cell.nameLabel.textColor = .black
-        }
+//
+//        if let _ = note?.tags?.contains(tag) {
+//            cell.nameLabel.textColor = .bitterSweet
+//        } else {
+//            cell.nameLabel.textColor = .black
+//        }
     }
 
 }
@@ -178,11 +178,11 @@ extension TagsViewController: UITableViewDelegate {
         
         let tag = fetchedResultsController.object(at: indexPath)
         
-        if let _ = note?.tags?.contains(tag) {
-            note?.removeFromTags(tag)
-        } else {
-            note?.addToTags(tag)
-        }
+//        if let _ = note?.tags?.contains(tag) {
+//            note?.removeFromTags(tag)
+//        } else {
+//            note?.addToTags(tag)
+//        }
     }
     
 }
