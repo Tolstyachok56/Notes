@@ -25,6 +25,7 @@
 		046A476F20DA83C4007008CA /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A476E20DA83C4007008CA /* TagsViewController.swift */; };
 		046A477120DA83D3007008CA /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A477020DA83D3007008CA /* TagViewController.swift */; };
 		046A477320DA83DE007008CA /* AddTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A477220DA83DE007008CA /* AddTagViewController.swift */; };
+		046A477520DA9AD0007008CA /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A477420DA9AD0007008CA /* Note.swift */; };
 		046A4E5A20D3FF9E000AE93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A4E5920D3FF9E000AE93B /* AppDelegate.swift */; };
 		046A4E5C20D3FF9E000AE93B /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A4E5B20D3FF9E000AE93B /* NotesViewController.swift */; };
 		046A4E5F20D3FF9E000AE93B /* Notes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 046A4E5D20D3FF9E000AE93B /* Notes.storyboard */; };
@@ -53,6 +54,7 @@
 		046A476E20DA83C4007008CA /* TagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 		046A477020DA83D3007008CA /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		046A477220DA83DE007008CA /* AddTagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagViewController.swift; sourceTree = "<group>"; };
+		046A477420DA9AD0007008CA /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		046A4E5620D3FF9E000AE93B /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		046A4E5920D3FF9E000AE93B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		046A4E5B20D3FF9E000AE93B /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				046A476220DA5B7F007008CA /* Category.swift */,
+				046A477420DA9AD0007008CA /* Note.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				0444EBB120D8FA5400CD7C87 /* NoteTableViewCell.swift in Sources */,
 				046A475D20DA3773007008CA /* UIColor.swift in Sources */,
 				046A476320DA5B7F007008CA /* Category.swift in Sources */,
+				046A477520DA9AD0007008CA /* Note.swift in Sources */,
 				0444EBA720D7BCC700CD7C87 /* Notes.xcdatamodeld in Sources */,
 				046A477120DA83D3007008CA /* TagViewController.swift in Sources */,
 				0444EBC020D931AC00CD7C87 /* CategoryTableViewCell.swift in Sources */,
