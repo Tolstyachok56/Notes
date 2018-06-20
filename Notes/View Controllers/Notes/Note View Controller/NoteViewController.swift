@@ -81,7 +81,7 @@ class NoteViewController: UIViewController {
     }
     
     private func updateTagsLabel() {
-        tagsLabel.text = "No tags"
+        tagsLabel.text = note?.alphabetizedTagsAsString ?? "No tags"
     }
     
     //MARK: - Navigation
