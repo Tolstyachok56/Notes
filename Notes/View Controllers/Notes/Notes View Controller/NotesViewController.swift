@@ -120,7 +120,9 @@ class NotesViewController: UIViewController {
         
         cell.titleLabel.text = note.title
         cell.contentsLabel.text = note.contents
+        cell.tagsLabel.text = note.alphabetizedTagsAsString ?? "No tags"
         cell.updatedAtLabel.text = updatedAtDateFormatter.string(from: note.updatedAt!)
+        
         if let color = note.category?.color {
             cell.categoryColorView.backgroundColor = color
         } else {
