@@ -54,6 +54,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="KJs-Ek-4VK" id="fJR-dL-NcN"/>
+                                    <outlet property="delegate" destination="KJs-Ek-4VK" id="Gix-w8-WWw"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -69,6 +73,8 @@
                         <viewLayoutGuide key="safeArea" id="F0K-1i-UPI"/>
                     </view>
                     <connections>
+                        <outlet property="messageLabel" destination="wHL-4v-Hr9" id="vR8-2s-tzG"/>
+                        <outlet property="tableView" destination="YkY-cl-zvy" id="g2o-nu-55o"/>
                         <segue destination="9nO-BY-Iua" kind="show" identifier="AddTag" id="RXA-Tz-fwE"/>
                     </connections>
                 </viewController>
