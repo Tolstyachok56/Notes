@@ -55,7 +55,7 @@ class NoteViewController: UIViewController {
     private func setupView() {
         setupTextField()
         setupTextView()
-        updateCategoryLabel()
+        setupCategoryLabel()
     }
     
     private func setupTextField() {
@@ -64,6 +64,10 @@ class NoteViewController: UIViewController {
     
     private func setupTextView() {
         contentsTextView.text = note?.contents
+    }
+    
+    private func setupCategoryLabel() {
+        updateCategoryLabel()
     }
     
     private func updateCategoryLabel() {

@@ -18,6 +18,7 @@
 		0444EBC420D9346200CD7C87 /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444EBC320D9346200CD7C87 /* AddCategoryViewController.swift */; };
 		0444EBC620D9347600CD7C87 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444EBC520D9347600CD7C87 /* CategoryViewController.swift */; };
 		046A475D20DA3773007008CA /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A475C20DA3773007008CA /* UIColor.swift */; };
+		046A476020DA4B1A007008CA /* ColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A475F20DA4B1A007008CA /* ColorViewController.swift */; };
 		046A4E5A20D3FF9E000AE93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A4E5920D3FF9E000AE93B /* AppDelegate.swift */; };
 		046A4E5C20D3FF9E000AE93B /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A4E5B20D3FF9E000AE93B /* NotesViewController.swift */; };
 		046A4E5F20D3FF9E000AE93B /* Notes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 046A4E5D20D3FF9E000AE93B /* Notes.storyboard */; };
@@ -38,6 +39,7 @@
 		0444EBC320D9346200CD7C87 /* AddCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
 		0444EBC520D9347600CD7C87 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		046A475C20DA3773007008CA /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		046A475F20DA4B1A007008CA /* ColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorViewController.swift; sourceTree = "<group>"; };
 		046A4E5620D3FF9E000AE93B /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		046A4E5920D3FF9E000AE93B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		046A4E5B20D3FF9E000AE93B /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				0444EBC520D9347600CD7C87 /* CategoryViewController.swift */,
+				046A475E20DA4B04007008CA /* Color View Controller */,
 			);
 			path = "Category View Controller";
 			sourceTree = "<group>";
@@ -151,6 +154,14 @@
 				0444EBBF20D931AC00CD7C87 /* CategoryTableViewCell.swift */,
 			);
 			path = "Table View Cells";
+			sourceTree = "<group>";
+		};
+		046A475E20DA4B04007008CA /* Color View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				046A475F20DA4B1A007008CA /* ColorViewController.swift */,
+			);
+			path = "Color View Controller";
 			sourceTree = "<group>";
 		};
 		046A4E4D20D3FF9E000AE93B = {
@@ -320,6 +331,7 @@
 				046A4E7320D40788000AE93B /* CoreDataManager.swift in Sources */,
 				046A4E5C20D3FF9E000AE93B /* NotesViewController.swift in Sources */,
 				0444EBAE20D7E59F00CD7C87 /* UIViewController.swift in Sources */,
+				046A476020DA4B1A007008CA /* ColorViewController.swift in Sources */,
 				0444EBC620D9347600CD7C87 /* CategoryViewController.swift in Sources */,
 				0444EBC220D932AD00CD7C87 /* CategoriesViewController.swift in Sources */,
 				046A4E5A20D3FF9E000AE93B /* AppDelegate.swift in Sources */,

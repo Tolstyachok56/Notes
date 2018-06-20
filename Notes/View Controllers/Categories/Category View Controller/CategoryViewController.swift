@@ -10,9 +10,16 @@ import UIKit
 
 class CategoryViewController: UIViewController {
     
+    //MARK: - Segues
+    
+    private enum Segue {
+        static let Color = "Color"
+    }
+    
     //MARK: - Properties
     
     @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var colorView: UIView!
     
     //MARK: -
     
@@ -40,13 +47,44 @@ class CategoryViewController: UIViewController {
     
     private func setupView() {
         setupNameTextField()
+        setupColorView()
+    }
+    
+    private func setupColorView() {
+        colorView.layer.cornerRadius = CGFloat(colorView.frame.width / 2.0)
+        updateColorView()
+    }
+    
+    private func updateColorView() {
+        
     }
     
     private func setupNameTextField() {
         nameTextField.text = category?.name
     }
     
+    //MARK: - Navigation
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
+        
+        switch identifier {
+        case Segue.Color:
+            guard let destination = segue.destination as? ColorViewController else { return }
+            destination.delegate = self
+        default:
+            fatalError("Unexpected segue identifier")
+        }
+    }
+    
+}
 
+//MARK: - ColorViewControllerDelegate methods
 
+extension CategoryViewController: ColorViewControllerDelegate {
+    func controller(_ controller: ColorViewController, didPick color: UIColor) {
+        updateColorView()
+    }
+    
+    
 }
