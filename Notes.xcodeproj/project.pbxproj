@@ -271,9 +271,9 @@
 		046A4E6C20D40199000AE93B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				046A476720DA8355007008CA /* Tags */,
 				0444EBAB20D7E32100CD7C87 /* Notes */,
 				0444EBB920D9313E00CD7C87 /* Categories */,
+				046A476720DA8355007008CA /* Tags */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";

@@ -7,29 +7,52 @@
 //
 
 import UIKit
+import CoreData
 
 class AddTagViewController: UIViewController {
 
+    //MARK: - Properties
+    
+    @IBOutlet var nameTextField: UITextField!
+    
+    //MARK: -
+    
+    var managedObjectContext: NSManagedObjectContext?
+    
+    //MARK: - View life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        title = "Add Tag"
+        
+        setupView()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    //MARK: - View methods
+    
+    private func setupView() {
+        setupBarButtonItems()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    private func setupBarButtonItems() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save(_:)))
     }
-    */
-
+    
+    //MARK: - Actions
+    
+    @objc private func save(_ sender: UIBarButtonItem) {
+        guard let managedObjectContext = managedObjectContext else { return }
+        
+        guard let name = nameTextField.text, !name.isEmpty else {
+            showAlert(withTitle: "Name missing", andMessage: "Your tag doesn't have a name")
+            return
+        }
+        
+        let tag = Tag(context: managedObjectContext)
+        tag.name = nameTextField.text
+        
+        let _ = navigationController?.popViewController(animated: true)
+    }
+    
 }

@@ -7,29 +7,67 @@
 //
 
 import UIKit
+import CoreData
 
 class TagsViewController: UIViewController {
-
+    
+    //MARK: - Segues
+    
+    private enum Segue {
+        static let Tag = "Tag"
+        static let AddTag = "AddTag"
+    }
+    
+    //MARK: - Properties
+    
+    
+    //MARK: -
+    
+    var note: Note?
+    
+    //MARK: - View life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        title = "Tags"
+        
+        setupView()
+        fetchTags()
+        updateView()
     }
     
+    //MARK: - View methods
+    
+    private func setupView() {
+        
+    }
+    
+    private func updateView() {
+        
+    }
+    
+    //MARK: - Fetching
+    
+    private func fetchTags() {
+        
+    }
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        guard let identifier = segue.identifier else { return }
+        
+        switch identifier {
+        case Segue.AddTag:
+            guard let destination = segue.destination as? AddTagViewController else { return }
+            
+        case Segue.Tag:
+            guard let destination = segue.destination as? TagViewController else { return }
+            
+        default:
+            fatalError("Unexpected segue identifier")
+        }
     }
-    */
 
 }
