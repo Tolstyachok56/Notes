@@ -74,8 +74,8 @@ class CategoriesViewController: UIViewController {
             destination.managedObjectContext = note?.managedObjectContext
         case Segue.Category:
             guard let destination = segue.destination as? CategoryViewController else { return }
-            
-            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            guard let cell = sender as? CategoryTableViewCell else { return }
+            guard let indexPath = tableView.indexPath(for: cell) else { return }
             let category = fetchedResultsController.object(at: indexPath)
             destination.category = category
         default:
@@ -181,8 +181,6 @@ extension CategoriesViewController: UITableViewDelegate  {
         note?.category = category
         
         let _ = navigationController?.popViewController(animated: true)
-        
-        //TODO: - add accessory view to cell and make it segue to CategoryViewController properly
     }
     
 }
