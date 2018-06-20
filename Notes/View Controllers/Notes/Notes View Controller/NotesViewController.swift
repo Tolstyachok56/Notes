@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class NotesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+class NotesViewController: UIViewController {
     
     //MARK: - Segues
     
@@ -118,7 +118,22 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
-    //MARK: - UITableViewDataSource methods
+    //MARK: - Helper methods
+    
+    private func configure(_ cell: NoteTableViewCell, at indexPath: IndexPath) {
+        let note = fetchedResultsController.object(at: indexPath)
+        
+        cell.titleLabel.text = note.title
+        cell.contentsLabel.text = note.contents
+        cell.updatedAtLabel.text = updatedAtDateFormatter.string(from: note.updatedAt!)
+    }
+    
+}
+
+//MARK: - UITableViewDataSource methods
+
+extension NotesViewController: UITableViewDataSource {
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let sections = fetchedResultsController.sections else { return 0 }
@@ -148,10 +163,19 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
         note.managedObjectContext?.delete(note)
     }
     
-    //MARK: - NSFetchedResultsControllerDelegate methods
+}
+
+//MARK: - NSFetchedResultsControllerDelegate methods
+
+extension NotesViewController: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+        updateView()
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
@@ -176,21 +200,6 @@ class NotesViewController: UIViewController, UITableViewDataSource, UITableViewD
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
         }
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-        updateView()
-    }
-    
-    //MARK: - Helper methods
-    
-    private func configure(_ cell: NoteTableViewCell, at indexPath: IndexPath) {
-        let note = fetchedResultsController.object(at: indexPath)
-        
-        cell.titleLabel.text = note.title
-        cell.contentsLabel.text = note.contents
-        cell.updatedAtLabel.text = updatedAtDateFormatter.string(from: note.updatedAt!)
     }
 
 }

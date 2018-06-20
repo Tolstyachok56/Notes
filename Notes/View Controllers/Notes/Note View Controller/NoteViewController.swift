@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class NoteViewController: UIViewController {
     
@@ -20,7 +21,6 @@ class NoteViewController: UIViewController {
     
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var contentsTextView: UITextView!
-    
     @IBOutlet var categoryLabel: UILabel!
     
     
@@ -36,6 +36,7 @@ class NoteViewController: UIViewController {
         title = "Edit Note"
         
         setupView()
+        setupNotificationHandling()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -54,6 +55,7 @@ class NoteViewController: UIViewController {
     private func setupView() {
         setupTextField()
         setupTextView()
+        updateCategoryLabel()
     }
     
     private func setupTextField() {
@@ -64,6 +66,10 @@ class NoteViewController: UIViewController {
         contentsTextView.text = note?.contents
     }
     
+    private func updateCategoryLabel() {
+        categoryLabel.text = note?.category?.name ?? "No category"
+    }
+    
     //MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -72,9 +78,27 @@ class NoteViewController: UIViewController {
         switch identifier {
         case Segue.Categories:
             guard let destination = segue.destination as? CategoriesViewController else { return }
-            destination.managedObjectContext = note?.managedObjectContext
+            destination.note = note
         default:
             fatalError("Unexpected segue identifier")
+        }
+    }
+    
+    //MARK: - Helper methods
+    
+    private func setupNotificationHandling() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange(_:)), name: Notification.Name.NSManagedObjectContextObjectsDidChange, object: note?.managedObjectContext)
+    }
+    
+    //MARK: - Notification handling
+    
+    @objc private func managedObjectContextObjectsDidChange(_ notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject> else { return }
+        
+        if (updates.filter{ $0 == note}).count > 0 {
+            updateCategoryLabel()
         }
     }
     

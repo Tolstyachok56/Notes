@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CategoriesViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+class CategoriesViewController: UIViewController {
     
     //MARK: - Segues
     
@@ -25,12 +25,12 @@ class CategoriesViewController: UIViewController,UITableViewDataSource, UITableV
     
     //MARK: -
     
-    var managedObjectContext: NSManagedObjectContext?
+    var note: Note?
     
     //MARK: -
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Category> = {
-        guard let managedObjectContext = self.managedObjectContext else {
+        guard let managedObjectContext = self.note?.managedObjectContext else {
             fatalError("No managed object context found")
         }
         
@@ -71,7 +71,7 @@ class CategoriesViewController: UIViewController,UITableViewDataSource, UITableV
         switch identifier {
         case Segue.AddCategory:
             guard let destination = segue.destination as? AddCategoryViewController else { return }
-            destination.managedObjectContext = managedObjectContext
+            destination.managedObjectContext = note?.managedObjectContext
         case Segue.Category:
             guard let destination = segue.destination as? CategoryViewController else { return }
             
@@ -119,7 +119,25 @@ class CategoriesViewController: UIViewController,UITableViewDataSource, UITableV
         }
     }
     
-    //MARK: - UITableViewDataSource methods
+    //MARK: - Helper methods
+    
+    private func configure(_ cell: CategoryTableViewCell, at indexPath: IndexPath) {
+        let category = fetchedResultsController.object(at: indexPath)
+        
+        cell.nameLabel.text = category.name
+        
+        if note?.category == category {
+            cell.nameLabel.textColor = .bitterSweet
+        } else {
+            cell.nameLabel.textColor = .black
+        }
+    }
+    
+}
+
+//MARK: - UITableViewDataSource methods
+
+extension CategoriesViewController: UITableViewDataSource  {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let sections = fetchedResultsController.sections else { return 0 }
@@ -146,21 +164,40 @@ class CategoriesViewController: UIViewController,UITableViewDataSource, UITableV
         
         let category = fetchedResultsController.object(at: indexPath)
         
-        category.managedObjectContext?.delete(category)
+        note?.managedObjectContext?.delete(category)
     }
     
-    //MARK: - Helper methods
+}
+
+//MARK: - UITableViewDelegate methods
+
+extension CategoriesViewController: UITableViewDelegate  {
     
-    private func configure(_ cell: CategoryTableViewCell, at indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         let category = fetchedResultsController.object(at: indexPath)
         
-        cell.nameLabel.text = category.name
+        note?.category = category
+        
+        let _ = navigationController?.popViewController(animated: true)
+        
+        //TODO: - add accessory view to cell and make it segue to CategoryViewController properly
     }
     
-    //MARK: - NSFetchedResultsControllerDelegate methods
+}
+
+//MARK: - NSFetchedResultsControllerDelegate methods
+
+extension CategoriesViewController: NSFetchedResultsControllerDelegate  {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+        updateView()
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
@@ -186,10 +223,5 @@ class CategoriesViewController: UIViewController,UITableViewDataSource, UITableV
             }
         }
     }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-        updateView()
-    }
-    
+
 }

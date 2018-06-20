@@ -18,6 +18,7 @@ class CategoryTableViewCell: UITableViewCell {
     
     @IBOutlet var nameLabel: UILabel!
     
+    
     //MARK: - Initializer
     
     override func awakeFromNib() {

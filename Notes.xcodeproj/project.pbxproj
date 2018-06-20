@@ -17,6 +17,7 @@
 		0444EBC220D932AD00CD7C87 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444EBC120D932AD00CD7C87 /* CategoriesViewController.swift */; };
 		0444EBC420D9346200CD7C87 /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444EBC320D9346200CD7C87 /* AddCategoryViewController.swift */; };
 		0444EBC620D9347600CD7C87 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444EBC520D9347600CD7C87 /* CategoryViewController.swift */; };
+		046A475D20DA3773007008CA /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A475C20DA3773007008CA /* UIColor.swift */; };
 		046A4E5A20D3FF9E000AE93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A4E5920D3FF9E000AE93B /* AppDelegate.swift */; };
 		046A4E5C20D3FF9E000AE93B /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A4E5B20D3FF9E000AE93B /* NotesViewController.swift */; };
 		046A4E5F20D3FF9E000AE93B /* Notes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 046A4E5D20D3FF9E000AE93B /* Notes.storyboard */; };
@@ -36,6 +37,7 @@
 		0444EBC120D932AD00CD7C87 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		0444EBC320D9346200CD7C87 /* AddCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
 		0444EBC520D9347600CD7C87 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		046A475C20DA3773007008CA /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		046A4E5620D3FF9E000AE93B /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		046A4E5920D3FF9E000AE93B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		046A4E5B20D3FF9E000AE93B /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				0444EBAD20D7E59F00CD7C87 /* UIViewController.swift */,
+				046A475C20DA3773007008CA /* UIColor.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -192,8 +195,8 @@
 		046A4E6C20D40199000AE93B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0444EBB920D9313E00CD7C87 /* Categories */,
 				0444EBAB20D7E32100CD7C87 /* Notes */,
+				0444EBB920D9313E00CD7C87 /* Categories */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				046A4E5A20D3FF9E000AE93B /* AppDelegate.swift in Sources */,
 				0444EBAA20D7DE5D00CD7C87 /* AddNoteViewController.swift in Sources */,
 				0444EBB120D8FA5400CD7C87 /* NoteTableViewCell.swift in Sources */,
+				046A475D20DA3773007008CA /* UIColor.swift in Sources */,
 				0444EBA720D7BCC700CD7C87 /* Notes.xcdatamodeld in Sources */,
 				0444EBC020D931AC00CD7C87 /* CategoryTableViewCell.swift in Sources */,
 				0444EBC420D9346200CD7C87 /* AddCategoryViewController.swift in Sources */,
