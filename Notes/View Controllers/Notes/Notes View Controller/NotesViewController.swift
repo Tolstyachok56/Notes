@@ -49,7 +49,7 @@ class NotesViewController: UIViewController {
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Note.updatedAt), ascending: false)]
         
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.coreDataManager.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.coreDataManager.mainManagedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         
         fetchedResultsController.delegate = self
         
@@ -76,7 +76,7 @@ class NotesViewController: UIViewController {
         switch identifier {
         case Segue.AddNote:
             guard let destination = segue.destination as? AddNoteViewController else { return }
-            destination.managedObjectContext = coreDataManager.managedObjectContext
+            destination.managedObjectContext = coreDataManager.mainManagedObjectContext
         case Segue.Note:
             guard let destination = segue.destination as? NoteViewController else { return }
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
@@ -162,7 +162,7 @@ extension NotesViewController: UITableViewDataSource {
         
         let note = fetchedResultsController.object(at: indexPath)
         
-        note.managedObjectContext?.delete(note)
+        coreDataManager.mainManagedObjectContext.delete(note)
     }
     
 }
