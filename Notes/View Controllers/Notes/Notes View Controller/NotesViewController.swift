@@ -105,12 +105,30 @@ class NotesViewController: UIViewController {
     //MARK: - Fetching
     
     private func fetchNotes() {
-        do {
-            try self.fetchedResultsController.performFetch()
-        } catch let fetchError {
-            print("Unable to execute fetch request")
-            print("\(fetchError): \(fetchError.localizedDescription)")
+//        do {
+//            try self.fetchedResultsController.performFetch()
+//        } catch let fetchError {
+//            print("Unable to execute fetch request")
+//            print("\(fetchError): \(fetchError.localizedDescription)")
+//        }
+        
+        coreDataManager.mainManagedObjectContext.perform {
+            do {
+                let fetchedRequest: NSFetchRequest<Note> = Note.fetchRequest()
+                let notes = try fetchedRequest.execute()
+                if let note = notes.first {
+                    if let tags = note.tags as? Set<Tag> {
+                        print(tags)
+                        for tag in tags {
+                            print(tag.name ?? "")
+                        }
+                    }
+                }
+            } catch {
+                print(error)
+            }
         }
+        
     }
     
     //MARK: - Helper methods

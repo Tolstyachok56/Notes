@@ -18,12 +18,14 @@ final class CoreDataManager {
     
     private(set) lazy var mainManagedObjectContext: NSManagedObjectContext = {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        managedObjectContext.shouldDeleteInaccessibleFaults = false
         managedObjectContext.parent = self.privateManagedObjectContext
         return managedObjectContext
     }()
     
     private lazy var privateManagedObjectContext: NSManagedObjectContext = {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        managedObjectContext.shouldDeleteInaccessibleFaults = false
         managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
         return managedObjectContext
     }()
