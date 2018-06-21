@@ -16,11 +16,18 @@ final class CoreDataManager {
     
     //MARK: -
     
-    private(set) lazy var managedObjectContext: NSManagedObjectContext = {
+    private(set) lazy var mainManagedObjectContext: NSManagedObjectContext = {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        managedObjectContext.parent = self.privateManagedObjectContext
+        return managedObjectContext
+    }()
+    
+    private lazy var privateManagedObjectContext: NSManagedObjectContext = {
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
         return managedObjectContext
     }()
+    
     
     private lazy var managedObjectModel: NSManagedObjectModel = {
         guard let modelURL = Bundle.main.url(forResource: self.modelName, withExtension: "momd") else {
@@ -31,6 +38,7 @@ final class CoreDataManager {
         }
         return managedObjectModel
     }()
+    
     
     private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
