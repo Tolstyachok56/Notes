@@ -84,7 +84,7 @@ final class CoreDataManager {
     //MARK: -
     
     private func saveChanges() {
-        mainManagedObjectContext.performAndWait {
+        mainManagedObjectContext.perform {
             do {
                 if self.mainManagedObjectContext.hasChanges {
                     try self.mainManagedObjectContext.save()
@@ -93,18 +93,19 @@ final class CoreDataManager {
                 print("Unable to save changes of main managed object context")
                 print("\(saveError): \(saveError.localizedDescription)")
             }
-        }
-        
-        privateManagedObjectContext.perform {
-            do {
-                if self.privateManagedObjectContext.hasChanges {
-                    try self.privateManagedObjectContext.save()
+            
+            privateManagedObjectContext.perform {
+                do {
+                    if self.privateManagedObjectContext.hasChanges {
+                        try self.privateManagedObjectContext.save()
+                    }
+                } catch  let saveError {
+                    print("Unable to savechanges of private managed object context")
+                    print("\(saveError): \(saveError.localizedDescription)")
                 }
-            } catch  let saveError {
-                print("Unable to savechanges of private managed object context")
-                print("\(saveError): \(saveError.localizedDescription)")
             }
         }
+        
     }
     
 }
