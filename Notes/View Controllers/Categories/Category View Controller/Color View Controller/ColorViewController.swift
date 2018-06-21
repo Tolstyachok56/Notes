@@ -68,6 +68,7 @@ class ColorViewController: UIViewController {
     }
     
     private func setupColorView() {
+        colorView.layer.borderWidth = CGFloat(1.0)
         updateColorView()
     }
     
