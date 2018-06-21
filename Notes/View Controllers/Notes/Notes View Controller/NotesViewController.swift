@@ -26,7 +26,8 @@ class NotesViewController: UIViewController {
     
     //MARK: -
     
-    var coreDataManager = CoreDataManager(modelName: "Notes")
+//    var coreDataManager = CoreDataManager(modelName: "Notes")
+    private var persistentContainer = NSPersistentContainer(name: "Notes")
     
     //MARK: -
     
@@ -49,7 +50,7 @@ class NotesViewController: UIViewController {
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Note.updatedAt), ascending: false)]
         
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.coreDataManager.mainManagedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         
         fetchedResultsController.delegate = self
         
@@ -76,7 +77,7 @@ class NotesViewController: UIViewController {
         switch identifier {
         case Segue.AddNote:
             guard let destination = segue.destination as? AddNoteViewController else { return }
-            destination.managedObjectContext = coreDataManager.mainManagedObjectContext
+            destination.managedObjectContext = persistentContainer.viewContext
         case Segue.Note:
             guard let destination = segue.destination as? NoteViewController else { return }
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
@@ -162,7 +163,7 @@ extension NotesViewController: UITableViewDataSource {
         
         let note = fetchedResultsController.object(at: indexPath)
         
-        coreDataManager.mainManagedObjectContext.delete(note)
+        persistentContainer.viewContext.delete(note)
     }
     
 }
