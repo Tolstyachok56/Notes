@@ -115,7 +115,7 @@
                                     <constraint firstItem="pWg-sZ-Z04" firstAttribute="leading" secondItem="jt3-gm-hsq" secondAttribute="leading" id="z1w-8i-Gd0"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="DTN-H7-ekt">
+                            <activityIndicatorView contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="DTN-H7-ekt">
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>

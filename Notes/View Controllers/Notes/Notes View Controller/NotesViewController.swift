@@ -65,9 +65,16 @@ class NotesViewController: UIViewController {
         
         title = "Notes"
         
-        setupView()
-        fetchNotes()
-        updateView()
+        persistentContainer.loadPersistentStores { (persistentStoreDescription, error) in
+            if let error = error {
+                print("Unable to add persistent store")
+                print("\(error): \(error.localizedDescription)")
+            } else {
+                self.setupView()
+                self.fetchNotes()
+                self.updateView()
+            }
+        }
     }
     
     //MARK: - Navigation
@@ -92,6 +99,8 @@ class NotesViewController: UIViewController {
     //MARK: - View methods
     
     private func setupView() {
+        activityIndicatorView.stopAnimating()
+        notesView.isHidden = false
         setupMessageLabel()
     }
     
