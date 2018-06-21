@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Beh-LV-aIe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Beh-LV-aIe">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -115,13 +115,18 @@
                                     <constraint firstItem="pWg-sZ-Z04" firstAttribute="leading" secondItem="jt3-gm-hsq" secondAttribute="leading" id="z1w-8i-Gd0"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="DTN-H7-ekt">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="DTN-H7-ekt" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="7RR-8n-Whq"/>
                             <constraint firstItem="jt3-gm-hsq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="CJz-nN-L1f"/>
                             <constraint firstItem="jt3-gm-hsq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="OM6-BX-5CW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jt3-gm-hsq" secondAttribute="bottom" id="gkr-yV-w6V"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jt3-gm-hsq" secondAttribute="trailing" id="uid-gr-mze"/>
+                            <constraint firstItem="DTN-H7-ekt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yFq-9W-rsx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -133,6 +138,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="DTN-H7-ekt" id="yga-y4-31Q"/>
                         <outlet property="messageLabel" destination="45j-5R-lg6" id="aMS-Dy-lMB"/>
                         <outlet property="notesView" destination="jt3-gm-hsq" id="4dm-NG-LMN"/>
                         <outlet property="tableView" destination="pWg-sZ-Z04" id="BCY-W1-4Ea"/>
@@ -206,7 +212,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8I5-yl-cJY">
-                                <rect key="frame" x="16" y="207" width="343" height="444"/>
+                                <rect key="frame" x="16" y="207.5" width="343" height="443.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -231,19 +237,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvX-mn-fK1">
-                                <rect key="frame" x="16" y="162" width="27" height="15"/>
+                                <rect key="frame" x="16" y="162.5" width="27" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JN2-4K-dOo">
-                                <rect key="frame" x="16" y="181" width="305" height="18"/>
+                                <rect key="frame" x="16" y="181.5" width="305" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KUf-3G-EGG">
-                                <rect key="frame" x="329" y="162.5" width="30" height="36.5"/>
+                                <rect key="frame" x="329" y="162.5" width="30" height="37"/>
                                 <state key="normal" title="Edit"/>
                                 <connections>
                                     <segue destination="Ul2-wm-9XD" kind="show" identifier="Tags" id="15j-52-ZHW"/>

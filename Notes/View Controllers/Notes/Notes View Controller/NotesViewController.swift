@@ -23,6 +23,7 @@ class NotesViewController: UIViewController {
     @IBOutlet var notesView: UIView!
     @IBOutlet var messageLabel: UILabel!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
     
     //MARK: -
     
